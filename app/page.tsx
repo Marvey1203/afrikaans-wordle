@@ -23,12 +23,15 @@ export default function Home() {
   var uniqueWords: string[] = [];
 
   // Local storage for the users gueses
-  window.localStorage.setItem("Tries", JSON.stringify(0))
-  // Local storage for words not used
-  window.localStorage.setItem("wordsNotUsed", JSON.stringify([
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'          
-]))
+  if (typeof window !== 'undefined'){
+    window.localStorage.setItem("Tries", JSON.stringify(0))
+    // Local storage for words not used
+    window.localStorage.setItem("wordsNotUsed", JSON.stringify([
+      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+      'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'          
+  ]))
+  }
+
   
   // Loop through each word in the input list
   for (var i = 0; i < words.length; i++) {
