@@ -92,7 +92,10 @@ const Row: React.FC<RowProps> = ({ currentWord, onGameWin, onGameLoss, callBack,
     event.preventDefault();
     if (!checkIfWordExists(uniqueWords, inputs.join(""))){
       alert(`${inputs.join("")} is nie 'n woord nie`)
+      setTimeout(() => {
+      }, 1000);
       return
+
     }
 
     // Compare the guessed word with the current word
