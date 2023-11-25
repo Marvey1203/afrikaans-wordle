@@ -5,7 +5,7 @@ import Board from './comps/Board';
 
 export default function Home() {
   const words: (string | undefined)[] = [
-    "aalwé", "aanb.", "aand.", "aanh.", "aanhê", "aank.", "aanm.", "aant.", "aanv.", "aanw.", "aarde", "adder", "adjk.", "adjt.", "adml.", "adres",
+    "aalwé", "aanb.", "moord", "aand.", "aanh.", "aanhê", "aank.", "aanm.", "aant.", "aanv.", "aanw.", "aarde", "adder", "adjk.", "adjt.", "adml.", "adres",
     "advt.", "advv.", "aflas", "aflei", "agter", "aitsa", "Akad.", "akker", "albei", "album", "algar", "alles", "almal", "altyd", "Amer.", "amper", "ander",
     "angel", "Angl.", "anker", "anode", "anon.", "appel", "appl.", "April", "Arab.", "Aram.", "argon", "Arnth", "Asmaa", "asook", "asst.", "astr.", "ateïs", 
     "atome", "atoom", "attr.", "Augus", "Aulia", "AVBOB", "awend", "añkom", "B.Ed.", "b.nw.", "B.Sc.", "baaie", "babas", "Bahaa", "balie", "balle",
@@ -16,7 +16,7 @@ export default function Home() {
     "dagga", "dagsê", "Deens", "deken", "delta", "denne", "derde", "Deut.", "diens", "diere", "Diets", "Diits", "dikw.", "Dimli", "diode", "djinn", 
     "drama", "dreig", "drink", "dronk", "droog", "druif", "Duits", "duvet", "dwerg", "dwing", , "eende", "egter", "eiens", "eiers", "einde", "ekvv.", "eland", "elfde",
     "elite", "enige", "enkel", "erken", "Eseg.", "Ester", "ester", "etim.", "fabel", "fasie", "fauna", "faune", "Febr.", "fiets", "filet", "fliek", "flier", "fliir",
-    "flora", "frank", "Frans", "frase", "Frañs", "frees", "freug", "Fries"
+    "flora", "frank", "Frans", "frase", "Frañs", "frees", "freug", "Fries", "fiks", "figuur","fluit", "fokus", "foute","gaste","geel","geest","gener","genre","gifappel","glans","gloei","goeie","goedtjies","goeroe","goue","goumi","graf","granaat","griep","grime","gries","groet","groot","grond","grondboon","grooi","groet","grof",
   ];
   
   // Create an empty list to store unique words
@@ -49,14 +49,14 @@ export default function Home() {
       setTimeout(() => {
         setGameStarted(false);
         setGameWon(false);
-      }, 2000); 
+      }, 1000); 
     };    
     const handleGameLost = () => {
       setGameLost(true);
       setTimeout(() => {
         setGameStarted(false);
         setGameLost(false);
-      }, 3000); 
+      }, 1000); 
     };
   
     return (
@@ -64,7 +64,7 @@ export default function Home() {
         {!gameStarted && !gameWon && !gameLost && <StartScreen setGameStarted={setGameStarted} />}
         {(gameStarted || gameWon || gameLost) && (
           <div className=''>
-            <Board currentWord={currentWord} onGameWin={handleGameWin} onGameLost={handleGameLost} />
+            <Board currentWord={currentWord} onGameWin={handleGameWin} onGameLost={handleGameLost} uniqueWords={uniqueWords} />
           </div>
         )}
       </div>

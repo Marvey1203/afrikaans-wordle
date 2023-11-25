@@ -6,9 +6,10 @@ interface RowProps {
   onGameWin: Function;
   onGameLoss: Function; 
   callBack: Function;
+  uniqueWords: string[]
 }
 
-const Row: React.FC<RowProps> = ({ currentWord, onGameWin, onGameLoss, callBack }) => {
+const Row: React.FC<RowProps> = ({ currentWord, onGameWin, onGameLoss, callBack, uniqueWords }) => {
   const [inputs, setInputs] = useState<string[]>(["", "", "", "", ""]);
   const [bgColors, setBgColors] = useState<string[]>(["bg-black", "bg-black", "bg-black", "bg-black", "bg-black"]);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([null, null, null, null, null]);
@@ -27,11 +28,16 @@ const Row: React.FC<RowProps> = ({ currentWord, onGameWin, onGameLoss, callBack 
       }
     }
   };
+  const checkIfWordExists = (wordsList: string[], theCurrentWord: string) => {
+    if (wordsList.includes(theCurrentWord)){
+      return true
+    }else return false
+  }
   
-  useEffect(() => {
-    // Focus on the first input of the first row when the component mounts
-    inputRefs.current[0]?.focus();
-  }, []);
+  // useEffect(() => {
+  //   // Focus on the first input of the first row when the component mounts
+  //   inputRefs.current[0]?.focus();
+  // }, []);
   useEffect(() => {
     if (tries === 6) {
       setLost(true)
@@ -57,6 +63,9 @@ const Row: React.FC<RowProps> = ({ currentWord, onGameWin, onGameLoss, callBack 
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>, index: number) => {
     if (event.key === "Enter") {
+      if (!checkIfWordExists(uniqueWords, inputs.join(""))){
+        return
+      }
       checkIfWordInWordsNotUsed(inputs, wordsNotUsedArray)
       // Check the inputs when Enter is pressed
       checkInputs(event);
@@ -81,6 +90,10 @@ const Row: React.FC<RowProps> = ({ currentWord, onGameWin, onGameLoss, callBack 
 
   const checkInputs = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    if (!checkIfWordExists(uniqueWords, inputs.join(""))){
+      alert(`${inputs.join("")} is nie 'n woord nie`)
+      return
+    }
 
     // Compare the guessed word with the current word
     const newBgColors = currentWord.split("").map((char, index) => {
