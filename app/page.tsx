@@ -60,10 +60,12 @@ export default function Home() {
     };
   
     return (
-      <div className="flex flex-col h-screen justify-center items-center">
+      <div className="flex flex-col h-screen justify-start md:justify-center items-center ">
         {!gameStarted && !gameWon && !gameLost && <StartScreen setGameStarted={setGameStarted} />}
         {(gameStarted || gameWon || gameLost) && (
-          <div className=''>
+          <div className='flex flex-col justify-center items-center'>
+            <h2 className='font-bold mt-8 mb-1 text-2xl'>Kies 'n 5 letter woord</h2>
+            <div className='h-[2px] w-[85%] bg-blue-400'></div>
             <Board currentWord={currentWord} onGameWin={handleGameWin} onGameLost={handleGameLost} uniqueWords={uniqueWords} />
           </div>
         )}
